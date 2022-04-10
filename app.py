@@ -110,7 +110,7 @@ def download_decrypt():
 						msg = file_obj.read()
 						text = ENCDEC.AESCipher(key).decrypt(msg)
 						outputFilepath = "./media/temp/DecryptedFile.txt"
-						file_obj = open(outputFilepath,"w");
+						file_obj = open(outputFilepath,"w")
 						file_obj.write(text)
 						'''
 						Decrypt End
