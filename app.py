@@ -1,5 +1,6 @@
 import os
 import os.path
+import sys
 from flask import Flask, request, redirect, url_for, render_template, session, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 import DH
@@ -42,6 +43,8 @@ def call_page_upload():
 @app.route('/download-file')
 def call_page_download():
 	for root,dirs,files in os.walk(UPLOAD_FOLDER):
+		print('This is error output', file=sys.stderr)
+		print('This is standard output', file=sys.stdout)
 		return render_template('download.html',msg='',itr=0,length=len(files),list=files)
 
 # DOWNLOAD KEY FILE
@@ -112,6 +115,7 @@ def download_decrypt():
 						outputFilepath = "./media/temp/DecryptedFile.txt"
 						file_obj = open(outputFilepath,"w")
 						file_obj.write(text)
+						print('This is error output', file=sys.stderr)
 						'''
 						Decrypt End
 						'''
