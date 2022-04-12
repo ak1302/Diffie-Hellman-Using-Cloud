@@ -42,6 +42,7 @@ def call_page_upload():
 @app.route('/download-file')
 def call_page_download():
 	for root,dirs,files in os.walk(UPLOAD_FOLDER):
+		flash('Hellllooooo file')
 		return render_template('download.html',msg='',itr=0,length=len(files),list=files)
 
 # DOWNLOAD KEY FILE
