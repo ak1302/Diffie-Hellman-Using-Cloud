@@ -42,30 +42,10 @@ def index():
 def call_page_upload():
 	return render_template('upload.html')
 
-@app.route('/download-file', methods=['GET', 'POST'])
+@app.route('/download-file')
 def call_page_download():
-	#for root,dirs,files in os.walk(UPLOAD_FOLDER):
-	if request.method == 'POST':
-		for root,dirs,files in os.walk('./media/text-files/'):
-				for file in files:
-					if file == 'hello.txt':
-						filepath = UPLOAD_FOLDER+filename
-						if(os.path.isfile(filepath)):
-							'''
-							Decrypt Start
-							'''			
-							private_key = request.form['recv-priv']
-							public_key = request.form['send-publ']
-							key = DH.generate_secret(long(private_key), long(public_key))
-							str = key.encode('hex')
-							key = str[0:32]
-							file_obj = open("./media/text-files/hello.txt","r")
-							msg = file_obj.read()
-							text = ENCDEC.AESCipher(key).decrypt(msg)
-							outputFilepath = "./media/temp/hello.txt"
-							file_obj = open(outputFilepath,"w")
-							file_obj.write(text)
-			                                return render_template('download.html',msg='YELLOW',itr=0,length=len(files),list=files)
+	for root,dirs,files in os.walk(UPLOAD_FOLDER):
+		return render_template('download.html',msg='YELLOW',itr=0,length=len(files),list=files)
 
 # DOWNLOAD KEY FILE
 
@@ -112,34 +92,34 @@ def download_f():
 
 # DOWNLOAD DECRYPTED FILE
 
-# @app.route('/down', methods=['GET', 'POST'])
-# def download_decrypt():
-# 	if request.method == 'POST':
-# 		filename =  request.form['filename']
-# 		for root,dirs,files in os.walk('./media/text-files/'):
-# 			for file in files:
-# 				if file == filename:
-# 					filepath = UPLOAD_FOLDER+filename
-# 					if(os.path.isfile(filepath)):
-# 						'''
-# 						Decrypt Start
-# 						'''			
-# 						private_key = request.form['recv-priv']
-# 						public_key = request.form['send-publ']
-# 						key = DH.generate_secret(long(private_key), long(public_key))
-# 						str = key.encode('hex')
-# 						key = str[0:32]
-# 						file_obj = open("./media/text-files/hello.txt","r")
-# 						msg = file_obj.read()
-# 						text = ENCDEC.AESCipher(key).decrypt(msg)
-# 						outputFilepath = "./media/temp/hello.txt"
-# 						file_obj = open(outputFilepath,"w")
-# 						file_obj.write(text)
+@app.route('/down', methods=['GET', 'POST'])
+def download_decrypt():
+	if request.method == 'POST':
+		filename =  request.form['filename']
+		for root,dirs,files in os.walk('./media/text-files/'):
+			for file in files:
+				if file == filename:
+					filepath = UPLOAD_FOLDER+filename
+					if(os.path.isfile(filepath)):
+						'''
+						Decrypt Start
+						'''			
+						private_key = request.form['recv-priv']
+						public_key = request.form['send-publ']
+						key = DH.generate_secret(long(private_key), long(public_key))
+						str = key.encode('hex')
+						key = str[0:32]
+						file_obj = open("./media/text-files/hello.txt","r")
+						msg = file_obj.read()
+						text = ENCDEC.AESCipher(key).decrypt(msg)
+						outputFilepath = "./media/temp/hello.txt"
+						file_obj = open(outputFilepath,"w")
+						file_obj.write(text)
 						
-# 						'''
-# 						Decrypt End
-# 						'''
-# 						#return send_file(outputFilepath, as_attachment=True)
+						'''
+						Decrypt End
+						'''
+						return send_file(outputFilepath, as_attachment=True)
 # 						return "File" + text
 # 	return render_template('download.html')
 
