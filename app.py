@@ -116,6 +116,7 @@ def download_decrypt():
 						outputFilepath = "./media/temp/hello.txt"
 						file_obj = open(outputFilepath,"w")
 						file_obj.write(text)
+						file_obj.close()
 						
 						'''
 						Decrypt End
