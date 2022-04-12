@@ -119,7 +119,9 @@ def download_decrypt():
 						'''
 						Decrypt End
 						'''
-						return send_file(outputFilepath, as_attachment=True)
+						#return send_file(outputFilepath, as_attachment=True)
+						return "File" + text
+	return render_template('download.html')
 
 
 # UPLOAD ENCRYPTED FILE
