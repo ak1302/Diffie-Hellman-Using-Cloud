@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import os
 import os.path
 
@@ -45,8 +45,6 @@ def call_page_upload():
 @app.route('/download-file')
 def call_page_download():
 	for root,dirs,files in os.walk(UPLOAD_FOLDER):
-		print('This is error output', file=sys.stderr)
-		print('This is standard output', file=sys.stdout)
 		return render_template('download.html',msg='',itr=0,length=len(files),list=files)
 
 # DOWNLOAD KEY FILE
@@ -117,11 +115,11 @@ def download_decrypt():
 						outputFilepath = "./media/temp/DecryptedFile.txt"
 						file_obj = open(outputFilepath,"w")
 						file_obj.write(text)
-						print('This is error output', file=sys.stderr)
+						
 						'''
 						Decrypt End
 						'''
-						return send_file(outputFilepath,attachment_filename='DecryptedFile.txt', p_text = ' {} '.format(text), as_attachment=True)
+						return send_file(outputFilepath,attachment_filename='DecryptedFile.txt', as_attachment=True)
 
 
 # UPLOAD ENCRYPTED FILE
