@@ -111,7 +111,8 @@ def download_decrypt():
 						key = str[0:32]
 						file_obj = open("./media/text-files/hello.txt","r")
 						msg = file_obj.read()
-						text = ENCDEC.AESCipher(key).decrypt(msg)
+# 						text = ENCDEC.AESCipher(key).decrypt(msg)
+						text="Why are you doing this to me"
 						outputFilepath = "./media/temp/hello.txt"
 						file_obj = open(outputFilepath,"w")
 						file_obj.write(text)
